@@ -54,7 +54,10 @@ public class EmployeeHelper {
     employeeInput.keySet().forEach(key -> {
       switch (EmployeeConstants.valueOf(key.toUpperCase(Locale.ROOT))) {
         case NAME:
-          int id = employeeList.getEmployeeList().stream().map(Employee::getId).max(Integer::compare).get();
+          int id = 0;
+          if (!employeeList.getEmployeeList().isEmpty()) {
+            id = employeeList.getEmployeeList().stream().map(Employee::getId).max(Integer::compare).get();
+          }
           employee.setId(id + 1);
 
           employee.setName(employeeInput.get(key).toString());

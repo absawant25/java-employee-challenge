@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Employee {
 
-  private int id;
+  private int id = 0;
   private String name;
   private long salary;
   private int age;
@@ -72,5 +72,42 @@ public class Employee {
   public String toString() {
     return "Employee{" + "id=" + id + ", name='" + name + '\'' + ", salary=" + salary + ", age=" + age
         + ", profile_image='" + profile_image + '\'' + '}';
+  }
+
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+
+    Employee employee = (Employee) o;
+
+    if (id != employee.id) {
+      return false;
+    }
+    if (salary != employee.salary) {
+      return false;
+    }
+    if (age != employee.age) {
+      return false;
+    }
+    if (!name.equals(employee.name)) {
+      return false;
+    }
+    return profile_image.equals(employee.profile_image);
+  }
+
+  @Override
+  public int hashCode() {
+    int result = id;
+    result = 31 * result + name.hashCode();
+    result = 31 * result + (int) (salary ^ (salary >>> 32));
+    result = 31 * result + age;
+    result = 31 * result + profile_image.hashCode();
+    return result;
   }
 }
